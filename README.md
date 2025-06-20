@@ -1,70 +1,104 @@
-# Getting Started with Create React App
+# Bebidas Web 🍻
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Este projeto é a interface web de um sistema de cardápio de bebidas. Usuários podem visualizar bebidas, adicionar ao carrinho, cadastrar-se, fazer login, gerenciar perfil, endereços, métodos de pagamento e realizar pedidos.
 
-## Available Scripts
+## 🧱 Tecnologias Utilizadas
 
-In the project directory, you can run:
+- [React.js](https://reactjs.org/)
+- [Tailwind CSS](https://tailwindcss.com/)
+- [React Router](https://reactrouter.com/)
+- [Axios](https://axios-http.com/)
+- Backend em Node.js com Sequelize (em outro repositório)
 
-### `npm start`
+---
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## ⚙️ Como Rodar o Projeto
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+### 1. Clone o repositório
 
-### `npm test`
+```bash
+git clone https://github.com/seu-usuario/bebidas-web.git
+cd bebidas-web
+```
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### 2. Instale as dependências
 
-### `npm run build`
+```bash
+npm install
+```
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### 3. Configure a URL da API
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+No arquivo `src/services/api.js`, verifique se o endereço da API backend está correto:
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+```js
+const api = axios.create({
+  baseURL: 'http://localhost:3000', // ajuste se necessário
+});
+```
 
-### `npm run eject`
+### 4. Rode o projeto
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+```bash
+npm start
+```
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+Acesse no navegador: [http://localhost:3001](http://localhost:3001)
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+---
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+## 📁 Estrutura de Pastas
 
-## Learn More
+```
+src/
+├── components/        # Componentes reutilizáveis (ex: MenuInferior)
+├── pages/             # Páginas do sistema (Login, Cadastro, Cardápio, etc.)
+├── services/          # Serviços de conexão com a API (axios)
+├── App.js             # Rotas principais
+├── index.js           # Entrada do app React
+```
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+---
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+## ✅ Funcionalidades
 
-### Code Splitting
+- Cadastro e login de usuários
+- Visualização de cardápio
+- Carrinho de compras
+- Finalização de pedidos
+- Tela de pedidos realizados
+- Gestão de perfil, endereços e pagamentos
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+---
 
-### Analyzing the Bundle Size
+## 🔐 Autenticação
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+O login armazena um `token JWT` no `localStorage`, que pode ser utilizado para autenticação nas requisições protegidas ao backend.
 
-### Making a Progressive Web App
+---
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+## 🛠️ Scripts Disponíveis
 
-### Advanced Configuration
+- `npm start` – Inicia o app em modo desenvolvimento (`http://localhost:3001`)
+- `npm run build` – Gera a build de produção
+- `npm test` – Inicia os testes
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+---
 
-### Deployment
+## 📦 Requisitos
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+- Node.js
+- npm
+- Backend disponível na porta `3000`
 
-### `npm run build` fails to minify
+---
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+## 📌 Observações
+
+Este projeto é apenas a **parte frontend**. Para funcionamento completo, clone e execute também o repositório do backend (`bebidas-api`).
+
+---
+
+## 📄 Licença
+
+Este projeto está licenciado sob a [MIT License](LICENSE).
