@@ -51,7 +51,7 @@ export default function Carrinho() {
 
       const novoPedido = await criarPedido(pedido);
       console.log("Pedido criado com sucesso:", novoPedido);
-      navigate("/pedidos");
+      navigate("/pedidos", { state: { sucesso: true } });
     } catch (erro) {
       console.error("Erro ao criar pedido:", erro);
       alert("Erro ao finalizar pedido. Verifique os dados.");

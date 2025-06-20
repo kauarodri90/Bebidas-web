@@ -1,15 +1,33 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
+import bcrypt from "bcryptjs";
+import api from "../services/api"; 
 
 export default function PaginaCadastro() {
   const [nome, setNome] = useState("");
   const [email, setEmail] = useState("");
   const [senha, setSenha] = useState("");
+  const navigate = useNavigate();
 
-  const handleCadastro = (e) => {
+  const handleCadastro = async (e) => {
     e.preventDefault();
-    console.log("Cadastro:", { nome, email, senha });
-    // Aqui vai a lógica para salvar o usuário (ex: API ou Firebase)
+
+    try {
+      const senhaCriptografada = await bcrypt.hash(senha, 10);
+
+      await api.post("/usuarios", {
+        nome,
+        email,
+        senha: senhaCriptografada,
+        id_permissao: 2,
+      });
+
+      alert("Cadastro realizado com sucesso!");
+      navigate("/login");
+    } catch (erro) {
+      console.error("Erro ao cadastrar:", erro);
+      alert("Erro ao cadastrar. Tente novamente.");
+    }
   };
 
   return (
@@ -59,7 +77,7 @@ export default function PaginaCadastro() {
         </form>
         <p className="text-center mt-4 text-sm">
           Já tem uma conta?{" "}
-          <Link to="/" className="text-blue-700 underline">
+          <Link to="/login" className="text-blue-700 underline">
             Entrar
           </Link>
         </p>

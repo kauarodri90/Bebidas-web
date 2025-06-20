@@ -1,19 +1,34 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
+import api from "../services/api";
 
 export default function Login() {
   const [email, setEmail] = useState("");
   const [senha, setSenha] = useState("");
+  const navigate = useNavigate();
 
-  const handleLogin = (e) => {
+  const handleLogin = async (e) => {
     e.preventDefault();
-    console.log("Login:", { email, senha });
+    try {
+      const response = await api.post("/login", {
+        email: email.trim(),
+        senha: senha.trim(),
+      });
+
+      localStorage.setItem("token", response.data.token);
+      navigate("/inicio");
+    } catch (error) {
+      console.error("Erro no login:", error);
+      alert("Falha no login. Verifique suas credenciais.");
+    }
   };
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-100 px-4">
       <div className="bg-white p-8 rounded-lg shadow-md w-full max-w-sm">
-        <h1 className="text-2xl font-bold mb-6 text-center text-red-700">Bem-vindo!</h1>
+        <h1 className="text-2xl font-bold mb-6 text-center text-red-700">
+          Bem-vindo!
+        </h1>
         <form onSubmit={handleLogin} className="space-y-4">
           <div>
             <label className="block mb-1 text-gray-700">E-mail</label>
@@ -44,9 +59,9 @@ export default function Login() {
         </form>
         <p className="text-center mt-4 text-sm">
           Não tem uma conta?{" "}
-            <Link to="/cadastro" className="text-blue-700 underline">
-                Cadastre-se
-            </Link>
+          <Link to="/cadastro" className="text-blue-700 underline">
+            Cadastre-se
+          </Link>
         </p>
       </div>
     </div>

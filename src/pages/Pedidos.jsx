@@ -1,16 +1,27 @@
 import { useEffect, useState } from "react";
 import { listarPedidos } from "../services/pedidoService";
+import MenuInferior from "../components/MenuInferior";
+import { useLocation } from "react-router-dom";
 
 export default function Pedidos() {
   const [pedidos, setPedidos] = useState([]);
+  const location = useLocation();
+  const sucesso = location.state?.sucesso || false;
 
   useEffect(() => {
     listarPedidos().then(setPedidos).catch(console.error);
   }, []);
 
   return (
-    <div className="p-6">
+    <div className="p-6 min-h-screen bg-gray-100">
       <h1 className="text-2xl font-bold text-red-700 mb-4">Meus Pedidos</h1>
+
+      {sucesso && (
+        <div className="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded mb-4">
+          Pedido realizado com sucesso!
+        </div>
+      )}
+
       {pedidos.length === 0 ? (
         <p>Nenhum pedido encontrado.</p>
       ) : (
@@ -20,7 +31,9 @@ export default function Pedidos() {
             <p>Status: {pedido.status?.descricao}</p>
             <p>Data: {new Date(pedido.data).toLocaleDateString()}</p>
             <p>Pagamento: {pedido.pagamento?.nome}</p>
-            <p>Endereço: {pedido.endereco?.rua}, {pedido.endereco?.numero}</p>
+            <p>
+              Endereço: {pedido.endereco?.rua}, {pedido.endereco?.numero}
+            </p>
             <p className="mt-2 font-semibold">Itens:</p>
             <ul className="list-disc list-inside">
               {pedido.itens.map((item, index) => (
@@ -32,6 +45,8 @@ export default function Pedidos() {
           </div>
         ))
       )}
+
+      <MenuInferior />
     </div>
   );
 }
