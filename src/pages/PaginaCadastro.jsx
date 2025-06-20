@@ -1,7 +1,7 @@
 import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
-import bcrypt from "bcryptjs";
-import api from "../services/api"; 
+import bcrypt from "bcryptjs"; // Biblioteca para criptografar senhas no frontend
+import api from "../services/api"; // Instância do Axios para requisições
 
 export default function PaginaCadastro() {
   const [nome, setNome] = useState("");
@@ -13,12 +13,13 @@ export default function PaginaCadastro() {
     e.preventDefault();
 
     try {
+      // Criptografa a senha antes de enviar ao backend
       const senhaCriptografada = await bcrypt.hash(senha, 10);
 
       await api.post("/usuarios", {
         nome,
         email,
-        senha: senhaCriptografada,
+        senha: senhaCriptografada, // Senha já vem criptografada
         id_permissao: 2,
       });
 

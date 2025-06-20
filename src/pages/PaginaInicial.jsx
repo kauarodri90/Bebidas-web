@@ -2,10 +2,11 @@ import { Link } from "react-router-dom";
 import MenuInferior from "../components/MenuInferior";
 
 export default function PaginaInicial() {
+  // Lista de bebidas fixas para exibição como "Mais Vendidas"
   const maisVendidas = [
     {
       nome: "Heineken Long Neck",
-      preco: 15,
+      preco: 9.99,
       imagem: "https://via.placeholder.com/60?text=Heineken",
     },
     {
@@ -14,9 +15,9 @@ export default function PaginaInicial() {
       imagem: "https://via.placeholder.com/60?text=Red+Bull",
     },
     {
-      nome: "Vodka Absolut",
-      preco: 70,
-      imagem: "https://via.placeholder.com/60?text=Absolut",
+      nome: "WHisky Red Label",
+      preco: 99.99,
+      imagem: "https://via.placeholder.com/60?text=Whisky",
     },
   ];
 

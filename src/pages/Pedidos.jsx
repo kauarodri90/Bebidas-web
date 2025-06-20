@@ -1,15 +1,17 @@
 import { useEffect, useState } from "react";
 import { listarPedidos } from "../services/pedidoService";
 import MenuInferior from "../components/MenuInferior";
-import { useLocation } from "react-router-dom";
+import { useLocation } from "react-router-dom";// Hook para acessar o estado da navegação
 
 export default function Pedidos() {
+  // Estado para armazenar os pedidos
   const [pedidos, setPedidos] = useState([]);
   const location = useLocation();
   const sucesso = location.state?.sucesso || false;
 
+  // useEffect executa ao carregar a página - busca os pedidos da API
   useEffect(() => {
-    listarPedidos().then(setPedidos).catch(console.error);
+    listarPedidos().then(setPedidos).catch(console.error);// Atualiza o estado com os dados recebidos
   }, []);
 
   return (

@@ -4,21 +4,23 @@ import MenuInferior from "../components/MenuInferior";
 export default function Cardapio() {
   const [carrinho, setCarrinho] = useState([]);
 
+  // Função para adicionar uma bebida ao carrinho
   const adicionarAoCarrinho = (bebida) => {
-    const existente = carrinho.find((item) => item.nome === bebida.nome);
+    const existente = carrinho.find((item) => item.nome === bebida.nome);// Verifica se a bebida já está no carrinho
     if (existente) {
-      existente.quantidade++;
+      existente.quantidade++;// Se já existe, incrementa a quantidade
       setCarrinho([...carrinho]);
     } else {
-      setCarrinho([...carrinho, { ...bebida, quantidade: 1 }]);
+      setCarrinho([...carrinho, { ...bebida, quantidade: 1 }]);// Caso contrário, adiciona com quantidade 1
     }
   };
 
+  // Lista de bebidas disponíveis no cardápio
   const bebidas = [
-    { nome: "Heineken Long Neck", descricao: "Cerveja puro malte 330ml.", preco: 15, imagem: "https://via.placeholder.com/60?text=Heineken" },
+    { nome: "Heineken Long Neck", descricao: "Cerveja puro malte 330ml.", preco: 9.99, imagem: "https://via.placeholder.com/60?text=Heineken" },
     { nome: "Red Bull", descricao: "Energético original 250ml.", preco: 12, imagem: "https://via.placeholder.com/60?text=Red+Bull" },
-    { nome: "Whisky Red Label", descricao: "Whisky Red Label, ideal para drinks.", preco: 99, imagem: "https://via.placeholder.com/60?text=Absolut" },
-    { nome: "Brahma", descricao: "Cerveja Brahma lata.", preco: 9.99, imagem: "https://via.placeholder.com/60?text=Guarana" },
+    { nome: "Whisky Red Label", descricao: "Whisky Red Label, ideal para drinks.", preco: 99, imagem: "https://via.placeholder.com/60?text=Whisky" },
+    { nome: "Brahma", descricao: "Cerveja Brahma lata.", preco: 7.99, imagem: "https://via.placeholder.com/60?text=Brahma" },
     { nome: "Coca-Cola", descricao: "Refrigerante Coca-Cola lata 350ml.", preco: 6, imagem: "https://via.placeholder.com/60?text=Coca-Cola" },
   ];
 

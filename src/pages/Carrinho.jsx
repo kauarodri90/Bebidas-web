@@ -5,24 +5,29 @@ import { criarPedido } from "../services/pedidoService";
 
 export default function Carrinho() {
   const [itens, setItens] = useState([
-    { id_produto: 1, nome: "Heineken Long Neck", quantidade: 2, preco: 15 },
-    { id_produto: 2, nome: "Red Bull", quantidade: 1, preco: 12 },
+    { id_produto: 1, nome: "Heineken Long Neck", quantidade: 2, preco: 18.98 },
+    { id_produto: 2, nome: "Brahma", quantidade: 1, preco: 7.99},
   ]);
+
+  // Estados para controle de edição de quantidade
   const [editandoIndex, setEditandoIndex] = useState(null);
   const [novaQuantidade, setNovaQuantidade] = useState(1);
   const navigate = useNavigate();
 
+  // Função para remover item do carrinho
   const removerItem = (index) => {
     const novosItens = [...itens];
     novosItens.splice(index, 1);
     setItens(novosItens);
   };
 
+  // Ativa o modo de edição de quantidade
   const editarItem = (index) => {
     setEditandoIndex(index);
     setNovaQuantidade(itens[index].quantidade);
   };
 
+  // Salva a nova quantidade editada
   const salvarEdicao = (index) => {
     const novosItens = [...itens];
     novosItens[index].quantidade = novaQuantidade;
@@ -34,6 +39,7 @@ export default function Carrinho() {
     setEditandoIndex(null);
   };
 
+  // Função para enviar o pedido para o backend
   const finalizarPedido = async () => {
     try {
       const pedido = {
@@ -51,13 +57,14 @@ export default function Carrinho() {
 
       const novoPedido = await criarPedido(pedido);
       console.log("Pedido criado com sucesso:", novoPedido);
-      navigate("/pedidos", { state: { sucesso: true } });
+      navigate("/pedidos", { state: { sucesso: true } });// Redireciona para tela de pedidos
     } catch (erro) {
       console.error("Erro ao criar pedido:", erro);
       alert("Erro ao finalizar pedido. Verifique os dados.");
     }
   };
 
+  // Cálculo do total do pedido
   const total = itens.reduce(
     (soma, item) => soma + item.preco * item.quantidade,
     0

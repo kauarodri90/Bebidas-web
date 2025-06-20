@@ -3,6 +3,7 @@ import { useState } from "react";
 import api from "../services/api";
 
 export default function Login() {
+  // Estados para armazenar os dados do formulário
   const [email, setEmail] = useState("");
   const [senha, setSenha] = useState("");
   const navigate = useNavigate();
@@ -10,6 +11,7 @@ export default function Login() {
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
+    // Envia requisição POST para autenticação  
       const response = await api.post("/login", {
         email: email.trim(),
         senha: senha.trim(),
@@ -36,7 +38,7 @@ export default function Login() {
               type="email"
               className="w-full px-4 py-2 border rounded focus:outline-none focus:ring-2 focus:ring-red-500"
               value={email}
-              onChange={(e) => setEmail(e.target.value)}
+              onChange={(e) => setEmail(e.target.value)} // Atualiza estado do email
               required
             />
           </div>
@@ -46,7 +48,7 @@ export default function Login() {
               type="password"
               className="w-full px-4 py-2 border rounded focus:outline-none focus:ring-2 focus:ring-red-500"
               value={senha}
-              onChange={(e) => setSenha(e.target.value)}
+              onChange={(e) => setSenha(e.target.value)}// Atualiza estado da senha
               required
             />
           </div>
